@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Digital Homeowner Binder | Gary & Jessie Leonard</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #D4547E;
+    --rose-dark: #BB3A65;
+    --blush: #E8C4B8;
+    --cream: #F9EFE7;
+    --cream2: #f0d8d0;
+    --dark: #2C2C2C;
+    --muted: #555555;
+    --subtle: #888888;
+    --white: #FFFFFF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #F9EFE7 0%, #f0d8d0 50%, #fbe8e3 100%);
+    padding: 60px 24px 50px;
+    text-align: center;
+    border-bottom: 3px solid var(--blush);
+    position: relative;
+  }
+  .hero-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: var(--rose); }
+  .hero-sub {
+    font-size: 16px;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 8px;
+  }
+  .hero-date {
+    display: inline-block;
+    background: var(--rose);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    border-radius: 20px;
+    margin-top: 16px;
+  }
+  .hero-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--rose-dark);
+    font-weight: 600;
+    margin-top: 10px;
+  }
+
+  /* NAV TABS */
+  .tab-nav {
+    background: var(--white);
+    border-bottom: 2px solid var(--blush);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tab-nav::-webkit-scrollbar { height: 0; }
+  .tab-nav-inner {
+    display: inline-flex;
+    padding: 0 16px;
+    min-width: 100%;
+  }
+  .tab-btn {
+    display: inline-block;
+    padding: 14px 18px;
+    font-family: 'Lato', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    border: none;
+    background: none;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--rose); }
+  .tab-btn.active {
+    color: var(--rose);
+    border-bottom-color: var(--rose);
+  }
+
+  /* SECTIONS */
+  .section { display: none; padding: 40px 24px 60px; max-width: 860px; margin: 0 auto; }
+  .section.active { display: block; }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 6px;
+  }
+  .section-title span { color: var(--rose); }
+  .section-divider {
+    width: 50px;
+    height: 3px;
+    background: var(--rose);
+    margin-bottom: 28px;
+    border-radius: 2px;
+  }
+  .section-intro {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--muted);
+    margin-bottom: 32px;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-left: 4px solid var(--blush);
+  }
+  .card.rose-border { border-left-color: var(--rose); }
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 10px;
+  }
+  .card p, .card li {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+  .card ul { padding-left: 20px; }
+  .card ul li { margin-bottom: 6px; }
+
+  /* WELCOME LETTER */
+  .welcome-letter {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(212,84,126,0.1);
+    border-top: 5px solid var(--rose);
+    line-height: 1.8;
+    font-size: 16px;
+    color: var(--muted);
+  }
+  .welcome-letter p { margin-bottom: 16px; }
+  .welcome-letter .signature {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--rose);
+    margin-top: 8px;
+  }
+  .welcome-letter .sig-title {
+    font-size: 13px;
+    color: var(--subtle);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* TIMELINE */
+  .timeline { list-style: none; padding: 0; }
+  .timeline li {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 24px;
+    align-items: flex-start;
+  }
+  .timeline-dot {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 50%;
+    background: var(--rose);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .timeline-content h4 {
+    font-weight: 700;
+    color: var(--dark);
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  .timeline-content p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* PROGRESS BAR */
+  .progress-wrap { margin-bottom: 28px; }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--rose);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .progress-bar-bg {
+    background: var(--blush);
+    border-radius: 6px;
+    height: 10px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--rose), var(--rose-dark));
+    border-radius: 6px;
+    transition: width 0.5s ease;
+  }
+
+  /* CHECKLIST */
+  .checklist-group { margin-bottom: 32px; }
+  .checklist-group h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--dark);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--blush);
+  }
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f5ede8;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .checklist-item:last-child { border-bottom: none; }
+  .checklist-item.done { opacity: 0.45; }
+  .checklist-item.done .item-text { text-decoration: line-through; }
+  .check-box {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: 6px;
+    border: 2px solid var(--blush);
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    margin-top: 1px;
+  }
+  .checklist-item.done .check-box {
+    background: var(--rose);
+    border-color: var(--rose);
+  }
+  .check-box svg { display: none; }
+  .checklist-item.done .check-box svg { display: block; }
+  .item-text { font-size: 15px; color: var(--dark); line-height: 1.5; }
+  .item-note { font-size: 13px; color: var(--subtle); margin-top: 3px; }
+
+  /* ADDRESS GRID */
+  .address-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .address-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+    text-align: center;
+  }
+  .address-card:hover { border-color: var(--blush); }
+  .address-card.done {
+    background: var(--cream);
+    border-color: var(--rose);
+    opacity: 0.65;
+  }
+  .address-card .addr-icon { font-size: 24px; margin-bottom: 8px; }
+  .address-card .addr-name {
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+  .address-card .addr-status {
+    font-size: 11px;
+    color: var(--subtle);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .address-card.done .addr-status { color: var(--rose); }
+
+  /* SEASONAL TABS */
+  .season-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .season-btn {
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: 2px solid var(--blush);
+    background: var(--white);
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .season-btn:hover, .season-btn.active {
+    background: var(--rose);
+    border-color: var(--rose);
+    color: var(--white);
+  }
+  .season-panel { display: none; }
+  .season-panel.active { display: block; }
+
+  /* MAINTENANCE LOG */
+  .maint-log { margin-top: 32px; }
+  .maint-log h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--dark);
+    margin-bottom: 16px;
+  }
+  .maint-log table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .maint-log th {
+    background: var(--cream2);
+    color: var(--rose-dark);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  .maint-log td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--blush);
+    color: var(--muted);
+  }
+  .maint-log tr:last-child td { border-bottom: none; }
+
+  /* FAQ */
+  .faq-item {
+    background: var(--white);
+    border-radius: 10px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .faq-q {
+    padding: 18px 22px;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--dark);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.2s;
+  }
+  .faq-q:hover { color: var(--rose); }
+  .faq-q .faq-arrow {
+    font-size: 18px;
+    color: var(--rose);
+    transition: transform 0.3s;
+  }
+  .faq-item.open .faq-arrow { transform: rotate(180deg); }
+  .faq-a {
+    display: none;
+    padding: 0 22px 18px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--muted);
+    border-top: 1px solid var(--blush);
+    padding-top: 16px;
+  }
+  .faq-item.open .faq-a { display: block; }
+
+  /* REVIEW BUTTONS */
+  .review-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .review-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 22px 16px;
+    background: var(--white);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--dark);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    transition: all 0.2s;
+    border: 2px solid transparent;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .review-btn:hover {
+    border-color: var(--rose);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212,84,126,0.15);
+  }
+  .review-btn .r-icon { font-size: 28px; }
+
+  /* SOCIAL BUTTONS */
+  .social-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--rose);
+    color: var(--white);
+    border-radius: 24px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    transition: background 0.2s;
+  }
+  .social-btn:hover { background: var(--rose-dark); }
+
+  /* UPDATE FORM */
+  .update-form { background: var(--white); border-radius: 16px; padding: 32px; box-shadow: 0 2px 14px rgba(0,0,0,0.06); }
+  .form-group { margin-bottom: 20px; }
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--rose-dark);
+    margin-bottom: 8px;
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--blush);
+    border-radius: 8px;
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    color: var(--dark);
+    background: var(--cream);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--rose); }
+  .form-group textarea { min-height: 120px; resize: vertical; }
+  .form-submit {
+    width: 100%;
+    padding: 16px;
+    background: var(--rose);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+    letter-spacing: 1px;
+  }
+  .form-submit:hover { background: var(--rose-dark); }
+
+  /* SHELLEY CONTACT BAR */
+  .shelley-bar {
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-dark) 100%);
+    color: var(--white);
+    text-align: center;
+    padding: 40px 24px;
+    margin-top: 40px;
+  }
+  .shelley-bar h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  .shelley-bar p { font-size: 15px; opacity: 0.9; margin-bottom: 20px; }
+  .shelley-contact-row {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .shelley-contact-item {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.95;
+    transition: opacity 0.2s;
+  }
+  .shelley-contact-item:hover { opacity: 1; text-decoration: underline; }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: var(--subtle);
+    background: var(--cream2);
+    border-top: 1px solid var(--blush);
+  }
+
+  /* BADGE */
+  .badge {
+    display: inline-block;
+    background: var(--cream2);
+    color: var(--rose-dark);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+  }
+
+  /* INFO GRID */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .info-tile {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .info-tile .tile-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--subtle);
+    margin-bottom: 6px;
+  }
+  .info-tile .tile-value {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--dark);
+  }
+  .info-tile .tile-value.rose { color: var(--rose); }
+</style>
+</head>
+<body>
+
+<script>
+const CLIENT = {
+  firstName:  "Gary & Jessie",
+  fullName:   "Gary & Jessie Leonard",
+  address:    "2790 Pebble Stone Trail, Xenia, OH 45385",
+  closedDate: "May 20, 2026",
+  salePrice:  "$465,000",
+  email:      "shelleymccunerealtor@gmail.com",
+};
+const BINDER_KEY = 'smc_' + CLIENT.closedDate.replace(/\W/g,'') + '_' + CLIENT.fullName.replace(/\s/g,'').slice(0,6).toLowerCase();
+</script>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-logo">Shelley McCune · eXp Realty · Your Digital Homeowner Binder</div>
+  <h1>Welcome Home,<br><span id="hero-name"></span>! 🏡</h1>
+  <p class="hero-sub" id="hero-address"></p>
+  <div class="hero-price" id="hero-price"></div>
+  <div class="hero-date" id="hero-date"></div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="showTab('welcome')">Welcome</button>
+    <button class="tab-btn" onclick="showTab('whats-next')">What's Next</button>
+    <button class="tab-btn" onclick="showTab('movein')">Move-In Plan</button>
+    <button class="tab-btn" onclick="showTab('address')">Address Updates</button>
+    <button class="tab-btn" onclick="showTab('maintenance')">Maintenance</button>
+    <button class="tab-btn" onclick="showTab('documents')">Documents</button>
+    <button class="tab-btn" onclick="showTab('faq')">FAQ</button>
+    <button class="tab-btn" onclick="showTab('reviews')">Reviews & Referrals</button>
+    <button class="tab-btn" onclick="showTab('update')">Send an Update</button>
+  </div>
+</nav>
+
+<!-- ============================
+     SECTION 1: WELCOME
+     ============================ -->
+<section id="welcome" class="section active">
+  <div class="badge">Your Personal Note from Shelley</div>
+  <div class="welcome-letter">
+    <p>Dear Gary & Jessie,</p>
+    <p>CONGRATULATIONS! You did it — and I honestly could not be more thrilled for you. Closing on 2790 Pebble Stone Trail on May 20, 2026 was a big deal, and you two handled every twist and turn like absolute champs.</p>
+    <p>I put this binder together just for you. Bookmark it, save it to your home screen, share it with your family — it's your personal post-closing home base. Inside you'll find your move-in checklist, a timeline of what happens in the next few weeks, every address you'll need to update, seasonal maintenance reminders, and easy links to stay in touch.</p>
+    <p>It has been such a genuine pleasure working with you. You are exactly the kind of people I love doing this for — and I don't say that lightly. This is just the beginning of our relationship, and I hope you'll reach out whenever you need anything. Real estate question, contractor recommendation, just want to chat — I'm here.</p>
+    <p>Now go celebrate — you've more than earned it! 🥂</p>
+    <p>With so much love and gratitude,</p>
+    <div class="signature">Shelley McCune</div>
+    <div class="sig-title">REALTOR® · eXp Realty · 937.728.5584</div>
+  </div>
+
+  <div style="margin-top: 32px;">
+    <div class="info-grid">
+      <div class="info-tile">
+        <div class="tile-label">Sellers</div>
+        <div class="tile-value">Gary &amp; Jessie Leonard</div>
+      </div>
+      <div class="info-tile">
+        <div class="tile-label">Property Sold</div>
+        <div class="tile-value">2790 Pebble Stone Trail<br><span style="font-size:14px;font-weight:400;color:var(--muted)">Xenia, OH 45385</span></div>
+      </div>
+      <div class="info-tile">
+        <div class="tile-label">Closing Date</div>
+        <div class="tile-value rose">May 20, 2026</div>
+      </div>
+      <div class="info-tile">
+        <div class="tile-label">Sale Price</div>
+        <div class="tile-value rose">$465,000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 2: WHAT'S NEXT
+     ============================ -->
+<section id="whats-next" class="section">
+  <div class="section-title">What <span>Happens Now</span></div>
+  <div class="section-divider"></div>
+  <p class="section-intro">Closing day is done — but there are a few things that wrap up behind the scenes over the next few weeks. Here's exactly what to expect and when.</p>
+
+  <ul class="timeline">
+    <li>
+      <div class="timeline-dot">1-3<br><span style="font-size:9px">days</span></div>
+      <div class="timeline-content">
+        <h4>Deed Recording</h4>
+        <p>The title company will record the deed with Greene County. Once recorded, you'll officially be out of the chain of title. This typically takes 1–3 business days.</p>
+      </div>
+    </li>
+    <li>
+      <div class="timeline-dot">1-2<br><span style="font-size:9px">wks</span></div>
+      <div class="timeline-content">
+        <h4>Lender Payoff Confirmation</h4>
+        <p>If you had a mortgage, your lender will process the payoff. You'll receive a final statement confirming your loan is paid in full. Keep this document.</p>
+      </div>
+    </li>
+    <li>
+      <div class="timeline-dot">2-4<br><span style="font-size:9px">wks</span></div>
+      <div class="timeline-content">
+        <h4>Escrow Refund</h4>
+        <p>If you had an escrow account for taxes and insurance, your lender will refund the remaining balance — usually within 20–30 business days of payoff. Watch for a check in the mail.</p>
+      </div>
+    </li>
+    <li>
+      <div class="timeline-dot">30<br><span style="font-size:9px">days</span></div>
+      <div class="timeline-content">
+        <h4>County Tax Records Update</h4>
+        <p>Greene County will update their tax records to reflect the new owner. The transfer of responsibility for future tax bills happens automatically.</p>
+      </div>
+    </li>
+    <li>
+      <div class="timeline-dot">Jan<br><span style="font-size:9px">next</span></div>
+      <div class="timeline-content">
+        <h4>1099-S / Tax Documents</h4>
+        <p>You may receive a 1099-S from the closing. Share this with your tax professional — depending on your situation, some or all of your gain may be excluded. Ask your CPA about the primary residence exclusion ($250K single / $500K married).</p>
+      </div>
+    </li>
+    <li>
+      <div class="timeline-dot">60<br><span style="font-size:9px">days</span></div>
+      <div class="timeline-content">
+        <h4>Closing Document Package</h4>
+        <p>You should receive your full closing document package from the title company. Store these in a safe place — you'll want them at tax time and for any future real estate transactions.</p>
+      </div>
+    </li>
+    <li>
+      <div class="timeline-dot">Now</div>
+      <div class="timeline-content">
+        <h4>Update Your Address Everywhere</h4>
+        <p>This one's on you! Head to the <strong>Address Updates</strong> tab for a complete checklist — USPS, DMV, banks, employers, subscriptions and more.</p>
+      </div>
+    </li>
+  </ul>
+
+  <div class="card rose-border" style="margin-top: 8px;">
+    <h3>📞 Questions about any of this?</h3>
+    <p>Seriously — just text me. I'm here for all of it, not just on closing day. 937.728.5584</p>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 3: MOVE-IN PLAN
+     ============================ -->
+<section id="movein" class="section">
+  <div class="section-title">Your <span>Move-In Game Plan</span></div>
+  <div class="section-divider"></div>
+  <p class="section-intro">Check off each item as you go — your progress saves automatically so you can come back anytime.</p>
+
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Your Progress</span>
+      <span id="progress-pct">0%</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div class="checklist-group">
+    <h3>🌅 First 24 Hours</h3>
+    <div class="checklist-item" data-key="mi1" onclick="toggleCheck(this)">
+      <div class="check-box"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="item-text">Locate all main shutoffs</div><div class="item-note">Water main, gas shutoff, electrical panel — know where they are before you need them</div></div>
+    </div>
+    <div class="checklist-item" data-key="mi2" onclick="toggleCheck(this)">
+      <div class="check-box"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="item-text">Change all door locks / rekey</div><div class="item-note">Previous owners, contractors, and neighbors may have had keys</div></div>
+    </div>
+    <div class="checklist-item" data-key="mi3" onclick="toggleCheck(this)">
+      <div class="check-box"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="item-text">Test all smoke & CO detectors</div><div class="item-note">Replace batteries; note detector locations for your records</div></div>
+    </div>
+    <div class="checklist-item" data-key="mi4" onclick="toggleCheck(this)">
+      <div class="check-box"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="item-text">Set up internet / wifi</div><div class="item-note">Schedule transfer or new service install ASAP — everything needs wifi</div></div>
+    </div>
+    <div class="checklist-item" data-key="mi5" onclick="toggleCheck(this)">
+      <div class="check-box"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="item-text">Run a load of laundry / test appliances</div><div class="item-note">Verify everything is working before you really need it</div></div>
+    </div>
+  </div>
+
+  <div class="checklist-group">
+    <h3>📦 First Week</h3>
+    <div class="checklist-item" data-key="mi6" onclick="toggleCheck(this)">
+      <div class="check-box"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="item-text">Submit USPS mail forwarding</div><div class="item-note">usps.com/move — takes about 7-10 days to kick in</div></div>
+    </div>
+    <div class="checklist-item" data-key="mi7" onclick="toggleCheck(this)">
+      <div class="check-box"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="item-text">Update address with employer / HR</div><div class="item-note">W-2, direct deposit, benefits enrollment — all need your new address</div></div>
+    </div>
+    <div class="checklist-item" data-key="mi8" onclick="toggleCheck(this)">
+      <div class="check-box"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="item-text">Transfer / set up utilities in your name</div><div class="item-note">Electric, gas, water, trash — confirm service dates so nothing lapses</div></div>
+    </div>
+    <div class="checklist-item" data-key="mi9" onclick="toggleCheck(this)">
+      <div class="check-box"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="item-text">Update homeowner's insurance</div><div class="item-note">Confirm your new policy is active; cancel old coverage once confirmed</div></div>
+    </div>
+    <div class="checklist-item" data-key="mi10" onclick="toggleCheck(this)">
+      <div class="check-box"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="item-text">Introduce yourself to neighbors</div><div class="item-note">They're your best neighborhood resource — and future friends!</div></div>
+    </div>
+  </div>
+
+  <div class="checklist-group">
+    <h3>📅 First Month</h3>
+    <div class="checklist-item" data-key="mi11" onclick="toggleCheck(this)">
+      <div class="check-box"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="item-text">Update Ohio driver's license / ID</div><div class="item-note">ohiobmv.com — you have 30 days from move date to update</div></div>
+    </div>
+    <div class="checklist-item" data-key="mi12" onclick="toggleCheck(this)">
+      <div class="check-box"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="item-text">Update vehicle registration</div><div class="item-note">Ohio BMV requires address update within 10 days of moving</div></div>
+    </div>
+    <div class="checklist-item" data-key="mi13" onclick="toggleCheck(this)">
+      <div class="check-box"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="item-text">Update voter registration</div><div class="item-note">voterlookup.sos.state.oh.us — takes 2 minutes online</div></div>
+    </div>
+    <div class="checklist-item" data-key="mi14" onclick="toggleCheck(this)">
+      <div class="check-box"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="item-text">Update banks, credit cards & investment accounts</div><div class="item-note">Don't miss statement mailings or tax documents being sent to the old address</div></div>
+    </div>
+    <div class="checklist-item" data-key="mi15" onclick="toggleCheck(this)">
+      <div class="check-box"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="item-text">Leave Shelley a review! ⭐</div><div class="item-note">It truly means the world — check the Reviews tab for direct links 💕</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 4: ADDRESS UPDATES
+     ============================ -->
+<section id="address" class="section">
+  <div class="section-title">Address <span>Update Checklist</span></div>
+  <div class="section-divider"></div>
+  <p class="section-intro">Tap each card as you update it. Your progress saves automatically. Don't let important mail — or your tax documents — go to the old address!</p>
+
+  <div class="address-grid" id="addr-grid">
+    <!-- Cards injected by JS -->
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 5: MAINTENANCE
+     ============================ -->
+<section id="maintenance" class="section">
+  <div class="section-title">Home <span>Maintenance</span></div>
+  <div class="section-divider"></div>
+  <p class="section-intro">A little maintenance now saves a lot of money later. Your seasonal checklists are here whenever you need them — and your maintenance log helps you track what's been done.</p>
+
+  <div class="season-tabs">
+    <button class="season-btn active" onclick="showSeason('spring')">🌸 Spring</button>
+    <button class="season-btn" onclick="showSeason('summer')">☀️ Summer</button>
+    <button class="season-btn" onclick="showSeason('fall')">🍂 Fall</button>
+    <button class="season-btn" onclick="showSeason('winter')">❄️ Winter</button>
+  </div>
+
+  <div id="season-spring" class="season-panel active">
+    <div class="card">
+      <h3>🌸 Spring Checklist</h3>
+      <ul>
+        <li>Inspect roof for winter damage — check flashing and gutters</li>
+        <li>Clean gutters and downspouts; check for clogs</li>
+        <li>Check exterior caulking and weather stripping</li>
+        <li>Service A/C unit — replace filter, check refrigerant</li>
+        <li>Test sprinkler system and irrigation heads</li>
+        <li>Inspect deck/patio for winter wear; clean and reseal if needed</li>
+        <li>Check driveway and walkways for cracks</li>
+        <li>Test outdoor GFCI outlets</li>
+        <li>Inspect window screens; repair or replace as needed</li>
+        <li>Deep clean the dryer vent (fire hazard if neglected!)</li>
+      </ul>
+    </div>
+  </div>
+  <div id="season-summer" class="season-panel">
+    <div class="card">
+      <h3>☀️ Summer Checklist</h3>
+      <ul>
+        <li>Check A/C filters monthly — replace every 60-90 days</li>
+        <li>Inspect and clean outdoor grills before each use</li>
+        <li>Check attic ventilation — proper airflow prevents heat buildup</li>
+        <li>Inspect plumbing for slow leaks under sinks</li>
+        <li>Trim trees and shrubs away from the house</li>
+        <li>Check crawl space / basement for moisture or water intrusion</li>
+        <li>Test smoke detectors and replace batteries</li>
+        <li>Inspect and clean range hood filters</li>
+        <li>Check exterior paint for peeling or bubbling</li>
+        <li>Flush water heater sediment (annually)</li>
+      </ul>
+    </div>
+  </div>
+  <div id="season-fall" class="season-panel">
+    <div class="card">
+      <h3>🍂 Fall Checklist</h3>
+      <ul>
+        <li>Service furnace / heat pump before first cold snap</li>
+        <li>Replace HVAC filters before heating season</li>
+        <li>Clean gutters after leaves fall — before first freeze</li>
+        <li>Drain and store garden hoses; turn off exterior spigots</li>
+        <li>Inspect chimney and fireplace if applicable</li>
+        <li>Check insulation in attic and crawl spaces</li>
+        <li>Seal gaps around doors and windows with weatherstripping</li>
+        <li>Test carbon monoxide detectors (more important with heat running)</li>
+        <li>Stock up on salt / sand for winter weather</li>
+        <li>Inspect garage door seals and opener safety features</li>
+      </ul>
+    </div>
+  </div>
+  <div id="season-winter" class="season-panel">
+    <div class="card">
+      <h3>❄️ Winter Checklist</h3>
+      <ul>
+        <li>Know how to shut off water main in case of burst pipes</li>
+        <li>Keep cabinet doors open in extreme cold (under-sink pipes)</li>
+        <li>Keep heat set to at least 55°F if leaving for extended periods</li>
+        <li>Check roof after heavy snowfall for ice dams</li>
+        <li>Keep walkways and driveway clear (slip &amp; fall liability)</li>
+        <li>Test sump pump before spring thaw</li>
+        <li>Replace smoke and CO detector batteries (New Year's reminder)</li>
+        <li>Check for drafts around windows and doors; add temporary insulation</li>
+        <li>Run water regularly in rarely-used fixtures to prevent freezing</li>
+        <li>Document any issues for spring repair planning</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="maint-log">
+    <h3>🛠️ Maintenance Log</h3>
+    <div class="card">
+      <p style="margin-bottom: 16px;">Keep a running record of repairs, replacements, and service visits. This information is incredibly valuable when you sell your home in the future!</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Item / System</th>
+            <th>Work Performed</th>
+            <th>Contractor / Cost</th>
+          </tr>
+        </thead>
+        <tbody id="maint-log-body">
+          <tr><td colspan="4" style="text-align:center; color:var(--subtle); padding: 20px;">Your maintenance records will go here — start logging!</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap;">
+        <input type="text" id="log-date" placeholder="Date" style="flex:1;min-width:100px;padding:10px 14px;border:2px solid var(--blush);border-radius:8px;font-family:'Lato',sans-serif;font-size:14px;background:var(--cream)">
+        <input type="text" id="log-item" placeholder="Item / System" style="flex:2;min-width:140px;padding:10px 14px;border:2px solid var(--blush);border-radius:8px;font-family:'Lato',sans-serif;font-size:14px;background:var(--cream)">
+        <input type="text" id="log-work" placeholder="Work performed" style="flex:3;min-width:180px;padding:10px 14px;border:2px solid var(--blush);border-radius:8px;font-family:'Lato',sans-serif;font-size:14px;background:var(--cream)">
+        <input type="text" id="log-cost" placeholder="Contractor / Cost" style="flex:2;min-width:140px;padding:10px 14px;border:2px solid var(--blush);border-radius:8px;font-family:'Lato',sans-serif;font-size:14px;background:var(--cream)">
+        <button onclick="addLogEntry()" style="padding:10px 20px;background:var(--rose);color:white;border:none;border-radius:8px;font-family:'Lato',sans-serif;font-weight:700;font-size:14px;cursor:pointer;white-space:nowrap;">+ Add Entry</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 6: DOCUMENTS
+     ============================ -->
+<section id="documents" class="section">
+  <div class="section-title">Your <span>Closing Documents</span></div>
+  <div class="section-divider"></div>
+  <p class="section-intro">Here's a summary of your closing and how to access your important documents.</p>
+
+  <div class="info-grid">
+    <div class="info-tile">
+      <div class="tile-label">Sellers</div>
+      <div class="tile-value">Gary &amp; Jessie Leonard</div>
+    </div>
+    <div class="info-tile">
+      <div class="tile-label">Property</div>
+      <div class="tile-value" style="font-size:14px">2790 Pebble Stone Trail<br>Xenia, OH 45385</div>
+    </div>
+    <div class="info-tile">
+      <div class="tile-label">Closing Date</div>
+      <div class="tile-value rose">May 20, 2026</div>
+    </div>
+    <div class="info-tile">
+      <div class="tile-label">Sale Price</div>
+      <div class="tile-value rose">$465,000</div>
+    </div>
+  </div>
+
+  <div class="card rose-border">
+    <h3>📁 Your Document Package</h3>
+    <p>Your full closing document package — including the settlement statement, deed, title commitment, and all disclosures — will be provided by the title company. Store these documents in a secure location, both physically and digitally.</p>
+    <br>
+    <p><strong>Recommended:</strong> Scan all documents and save to a cloud folder (Google Drive, iCloud, Dropbox). Label it "2790 Pebble Stone Trail — Closing Documents 2026."</p>
+  </div>
+
+  <div class="card">
+    <h3>📋 Documents to Keep Forever</h3>
+    <ul>
+      <li>Closing Disclosure (CD) — your official settlement statement</li>
+      <li>Deed — proof of ownership transfer</li>
+      <li>Title Insurance Policy — your protection against future title claims</li>
+      <li>Home Warranty (if applicable)</li>
+      <li>Survey — property boundaries</li>
+      <li>Inspection Reports — valuable for future repairs and disclosures</li>
+      <li>Any Seller's Disclosures or addenda</li>
+      <li>1099-S (for tax filing)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>📞 Need Documents from Shelley?</h3>
+    <p>I keep records of all transactions. If you need a copy of anything from your sale, just reach out:</p>
+    <br>
+    <p>📱 <strong>937.728.5584</strong> (call or text)</p>
+    <p>📧 <strong>shelleymccunerealtor@gmail.com</strong></p>
+    <p>🌐 <strong>shelleymccunerealtor.com</strong></p>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 7: FAQ
+     ============================ -->
+<section id="faq" class="section">
+  <div class="section-title">Common <span>Questions</span></div>
+  <div class="section-divider"></div>
+  <p class="section-intro">Here are the questions I hear most from sellers after closing. And remember — if yours isn't here, just text me!</p>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">When will I get my escrow refund? <span class="faq-arrow">▼</span></div>
+    <div class="faq-a">Your lender typically processes the escrow refund within 20–30 business days after your loan payoff is received. It usually comes as a check mailed to your new address — another reason to get that address updated ASAP! If it's been more than 6 weeks, call your lender directly.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Do I owe taxes on the sale? <span class="faq-arrow">▼</span></div>
+    <div class="faq-a">Possibly, but most homeowners qualify for the IRS primary residence exclusion — up to $250,000 in gain if you're single, or $500,000 if married filing jointly. You must have lived in the home as your primary residence for at least 2 of the last 5 years. Talk to your CPA for your specific situation — I'm not a tax advisor, but I can absolutely refer you to a great one!</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">When will the deed be recorded? <span class="faq-arrow">▼</span></div>
+    <div class="faq-a">The title company submits the deed to Greene County for recording, usually within 1–3 business days of closing. Once recorded, it becomes public record. You can search the Greene County Auditor's website to confirm.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">What happens to my homeowner's insurance? <span class="faq-arrow">▼</span></div>
+    <div class="faq-a">Your old policy on 2790 Pebble Stone Trail should be cancelled — but ONLY after you confirm the sale has closed and the deed has been transferred. Contact your insurance agent to cancel and request a pro-rated refund for the unused portion of your premium.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">I got mail at my old address — what do I do? <span class="faq-arrow">▼</span></div>
+    <div class="faq-a">First, make sure your USPS mail forwarding is active at usps.com/move (takes 7–10 days to kick in). If it's junk mail, just leave it — the new owners will recycle it. If it's something important, they should write "Not At This Address" on it and drop it in a mailbox so USPS returns it to the sender.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">What if I have questions about the closing statement? <span class="faq-arrow">▼</span></div>
+    <div class="faq-a">Text or call me anytime — 937.728.5584. If it's a title company question, I'll loop them in. If it's a tax question, I'll point you to a great CPA. You are never on your own with me!</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Can I use you to buy a home in the future? <span class="faq-arrow">▼</span></div>
+    <div class="faq-a">100% yes, and I would love that! Whether it's next year or five years from now — call me first. The market changes fast and I'll give you the real story, not a generic answer. You already know how I work. 💕</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">How do I refer someone to you? <span class="faq-arrow">▼</span></div>
+    <div class="faq-a">The easiest way? Just text them my number: 937.728.5584. Or send them to shelleymccunerealtor.com. You can also tag me on social media @shelleymccunerealtor — I love a good introduction! Referrals from past clients are the highest compliment I could ever receive. 🙏</div>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 8: REVIEWS & REFERRALS
+     ============================ -->
+<section id="reviews" class="section">
+  <div class="section-title">Reviews <span>&amp; Referrals</span></div>
+  <div class="section-divider"></div>
+  <p class="section-intro">If I earned it, I'd be so grateful for a review — it takes about 2 minutes and makes a huge difference for my business. And if you know someone who needs a great Realtor, I'd love the introduction! 💕</p>
+
+  <div class="badge">Leave a Review</div>
+  <div class="review-grid">
+    <a href="https://g.page/r/CcgeYeER1q9_EAE/review" target="_blank" class="review-btn">
+      <span class="r-icon">⭐</span>
+      <span>Google Review</span>
+      <span style="font-size:12px;font-weight:400;color:var(--subtle)">Most visible — starts here</span>
+    </a>
+    <a href="https://www.zillow.com/profile/ShelleyMcCune" target="_blank" class="review-btn">
+      <span class="r-icon">🏡</span>
+      <span>Zillow Review</span>
+      <span style="font-size:12px;font-weight:400;color:var(--subtle)">Great for future buyers</span>
+    </a>
+    <a href="https://www.facebook.com/shelleymccunerealtor" target="_blank" class="review-btn">
+      <span class="r-icon">👍</span>
+      <span>Facebook Review</span>
+      <span style="font-size:12px;font-weight:400;color:var(--subtle)">Seen by your network</span>
+    </a>
+  </div>
+
+  <div class="card rose-border" style="margin-top: 8px;">
+    <h3>🙏 Know Someone Buying or Selling?</h3>
+    <p>Referrals from past clients are truly how I built my business — and your people are in the best hands with me. You've seen how I work. Just send them my way!</p>
+    <br>
+    <p>📱 Text them my number: <strong>937.728.5584</strong></p>
+    <p>🌐 Or send them to: <strong>shelleymccunerealtor.com</strong></p>
+  </div>
+
+  <div style="margin-top: 32px;">
+    <div class="badge">Follow Along</div>
+    <p style="font-size:15px;color:var(--muted);margin-bottom:16px;">I share real estate tips, neighborhood news, and behind-the-scenes content on social. Come hang out with me!</p>
+    <div class="social-row">
+      <a href="https://www.instagram.com/shelleymccunerealtor" target="_blank" class="social-btn">📸 Instagram</a>
+      <a href="https://www.facebook.com/shelleymccunerealtor" target="_blank" class="social-btn">📘 Facebook</a>
+      <a href="https://www.tiktok.com/@shelleymccunerealtor" target="_blank" class="social-btn">🎵 TikTok</a>
+      <a href="https://stan.store/ShelleyMcCuneRealtor" target="_blank" class="social-btn">🛍️ Stan Store</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 9: SEND AN UPDATE
+     ============================ -->
+<section id="update" class="section">
+  <div class="section-title">Send <span>Shelley an Update</span></div>
+  <div class="section-divider"></div>
+  <p class="section-intro">New job? Kid starting school? Amazing trip? Cool new restaurant you found? I genuinely want to hear about it — send me an update and let's stay connected! 💕</p>
+
+  <div class="update-form">
+    <div class="form-group">
+      <label>What's the update about?</label>
+      <select id="upd-type">
+        <option value="Life Update">Life Update (new job, family news, milestone)</option>
+        <option value="Home Update">Home Update (renovation, improvement, neighborhood)</option>
+        <option value="Travel">Trip or Travel</option>
+        <option value="Local Find">Cool Local Find (restaurant, shop, event)</option>
+        <option value="Question for Shelley">Question for Shelley</option>
+        <option value="Referral">I have a referral for you!</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Your Name</label>
+      <input type="text" id="upd-name" value="Gary & Jessie Leonard" placeholder="Your name">
+    </div>
+    <div class="form-group">
+      <label>Tell me everything! 😊</label>
+      <textarea id="upd-message" placeholder="What's going on in your world?"></textarea>
+    </div>
+    <button class="form-submit" onclick="sendUpdate()">Send to Shelley 💕</button>
+  </div>
+</section>
+
+<!-- SHELLEY CONTACT BAR -->
+<div class="shelley-bar">
+  <h3>Shelley McCune · eXp Realty</h3>
+  <p>Your Realtor for life — not just for the transaction 💕</p>
+  <div class="shelley-contact-row">
+    <a href="tel:9377285584" class="shelley-contact-item">📱 937.728.5584</a>
+    <a href="mailto:shelleymccunerealtor@gmail.com" class="shelley-contact-item">📧 Email Shelley</a>
+    <a href="https://shelleymccunerealtor.com" target="_blank" class="shelley-contact-item">🌐 Website</a>
+    <a href="https://g.page/r/CcgeYeER1q9_EAE/review" target="_blank" class="shelley-contact-item">⭐ Leave a Review</a>
+  </div>
+</div>
+
+<div class="footer">
+  Built with love by Shelley McCune · eXp Realty · shelleymccunerealtor.com · 937.728.5584<br>
+  Created for Gary &amp; Jessie Leonard · 2790 Pebble Stone Trail, Xenia, OH 45385 · Closed May 20, 2026
+</div>
+
+<script>
+// ─── INIT ───────────────────────────────────────────────────────────────
+document.getElementById('hero-name').textContent = CLIENT.firstName;
+document.getElementById('hero-address').textContent = CLIENT.address;
+document.getElementById('hero-price').textContent = 'Sold for ' + CLIENT.salePrice;
+document.getElementById('hero-date').textContent = 'Closed ' + CLIENT.closedDate;
+
+// ─── TAB NAVIGATION ──────────────────────────────────────────────────────
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── MOVE-IN CHECKLIST ────────────────────────────────────────────────────
+const TOTAL_ITEMS = 15;
+function toggleCheck(el) {
+  const key = el.dataset.key;
+  const done = !el.classList.contains('done');
+  el.classList.toggle('done', done);
+  const saved = JSON.parse(localStorage.getItem(BINDER_KEY + '_movein') || '{}');
+  if (done) saved[key] = true; else delete saved[key];
+  localStorage.setItem(BINDER_KEY + '_movein', JSON.stringify(saved));
+  updateProgress();
+}
+function updateProgress() {
+  const saved = JSON.parse(localStorage.getItem(BINDER_KEY + '_movein') || '{}');
+  const done = Object.keys(saved).length;
+  const pct = Math.round((done / TOTAL_ITEMS) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-pct').textContent = pct + '%';
+}
+function loadMoveIn() {
+  const saved = JSON.parse(localStorage.getItem(BINDER_KEY + '_movein') || '{}');
+  document.querySelectorAll('.checklist-item').forEach(el => {
+    if (saved[el.dataset.key]) el.classList.add('done');
+  });
+  updateProgress();
+}
+loadMoveIn();
+
+// ─── ADDRESS UPDATES ──────────────────────────────────────────────────────
+const ADDRESSES = [
+  { icon: '📬', name: 'USPS Mail Forwarding' },
+  { icon: '🏦', name: 'Bank / Credit Union' },
+  { icon: '💳', name: 'Credit Cards' },
+  { icon: '🚗', name: 'Ohio BMV / License' },
+  { icon: '🗳️', name: 'Voter Registration' },
+  { icon: '💼', name: 'Employer / HR' },
+  { icon: '🏥', name: 'Health Insurance' },
+  { icon: '👨‍⚕️', name: 'Doctor / Dentist' },
+  { icon: '📦', name: 'Amazon / Online Shopping' },
+  { icon: '📺', name: 'Streaming Services' },
+  { icon: '📰', name: 'Magazine Subscriptions' },
+  { icon: '🐾', name: 'Vet Records' },
+  { icon: '📱', name: 'Cell Phone Provider' },
+  { icon: '🌐', name: 'Internet / Cable' },
+  { icon: '💡', name: 'Electric / Gas / Water' },
+  { icon: '🏛️', name: 'IRS / Tax Records' },
+  { icon: '📋', name: 'Social Security' },
+  { icon: '🎓', name: 'Student Loans / Schools' },
+  { icon: '🚙', name: 'Auto Insurance' },
+  { icon: '🏠', name: 'Homeowner\'s Insurance' },
+  { icon: '🏋️', name: 'Gym / Memberships' },
+  { icon: '💊', name: 'Pharmacy' },
+  { icon: '📪', name: 'HOA / Property Mgmt' },
+  { icon: '🔐', name: 'Password Manager / Apple ID' },
+];
+function loadAddresses() {
+  const saved = JSON.parse(localStorage.getItem(BINDER_KEY + '_addr') || '{}');
+  const grid = document.getElementById('addr-grid');
+  grid.innerHTML = '';
+  ADDRESSES.forEach((a, i) => {
+    const done = saved[i];
+    const el = document.createElement('div');
+    el.className = 'address-card' + (done ? ' done' : '');
+    el.innerHTML = `<div class="addr-icon">${a.icon}</div><div class="addr-name">${a.name}</div><div class="addr-status">${done ? '✓ Updated' : 'Tap to mark done'}</div>`;
+    el.onclick = () => {
+      const s = JSON.parse(localStorage.getItem(BINDER_KEY + '_addr') || '{}');
+      if (s[i]) delete s[i]; else s[i] = true;
+      localStorage.setItem(BINDER_KEY + '_addr', JSON.stringify(s));
+      loadAddresses();
+    };
+    grid.appendChild(el);
+  });
+}
+loadAddresses();
+
+// ─── SEASONAL MAINTENANCE ────────────────────────────────────────────────
+function showSeason(id) {
+  document.querySelectorAll('.season-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.season-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('season-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ─── MAINTENANCE LOG ──────────────────────────────────────────────────────
+function loadLog() {
+  const entries = JSON.parse(localStorage.getItem(BINDER_KEY + '_log') || '[]');
+  const tbody = document.getElementById('maint-log-body');
+  if (!entries.length) {
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--subtle);padding:20px;">Your maintenance records will go here — start logging!</td></tr>';
+    return;
+  }
+  tbody.innerHTML = entries.map(e => `<tr><td>${e.date}</td><td>${e.item}</td><td>${e.work}</td><td>${e.cost}</td></tr>`).join('');
+}
+function addLogEntry() {
+  const date = document.getElementById('log-date').value.trim();
+  const item = document.getElementById('log-item').value.trim();
+  const work = document.getElementById('log-work').value.trim();
+  const cost = document.getElementById('log-cost').value.trim();
+  if (!date || !item || !work) { alert('Please fill in at least the date, item, and work performed.'); return; }
+  const entries = JSON.parse(localStorage.getItem(BINDER_KEY + '_log') || '[]');
+  entries.push({ date, item, work, cost });
+  localStorage.setItem(BINDER_KEY + '_log', JSON.stringify(entries));
+  ['log-date','log-item','log-work','log-cost'].forEach(id => document.getElementById(id).value = '');
+  loadLog();
+}
+loadLog();
+
+// ─── FAQ ─────────────────────────────────────────────────────────────────
+function toggleFaq(el) {
+  el.parentElement.classList.toggle('open');
+}
+
+// ─── SEND UPDATE FORM ─────────────────────────────────────────────────────
+function sendUpdate() {
+  const type = document.getElementById('upd-type').value;
+  const name = document.getElementById('upd-name').value;
+  const msg  = document.getElementById('upd-message').value;
+  if (!msg.trim()) { alert('Tell me what\'s going on! 😊'); return; }
+  const subject = encodeURIComponent(type + ' from ' + name);
+  const body    = encodeURIComponent('Hi Shelley!\n\n' + msg + '\n\n— ' + name + '\n(Sent from my Digital Homeowner Binder — 2790 Pebble Stone Trail)');
+  window.open('mailto:shelleymccunerealtor@gmail.com?subject=' + subject + '&body=' + body);
+}
+</script>
+
+</body>
+</html>
