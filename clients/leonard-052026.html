@@ -151,12 +151,13 @@
 
 <script>
 const CLIENT = {
-  firstName:  "Gary & Jessie",
-  fullName:   "Gary & Jessie Leonard",
-  address:    "2790 Pebble Stone Trail, Xenia, OH 45385",
-  closedDate: "May 20, 2026",
-  salePrice:  "$465,000",
-  email:      "shelleymccunerealtor@gmail.com",
+  firstName:    "Gary & Jessie",
+  fullName:     "Gary & Jessie Leonard",
+  address:      "2790 Pebble Stone Trail, Xenia, OH 45385",
+  closedDate:   "May 20, 2026",
+  occupancyDate:"May 31, 2026",
+  salePrice:    "$465,000",
+  email:        "shelleymccunerealtor@gmail.com",
 };
 const BINDER_KEY = 'smc_' + CLIENT.closedDate.replace(/\W/g,'') + '_' + CLIENT.fullName.replace(/\s/g,'').slice(0,6).toLowerCase();
 
@@ -228,6 +229,7 @@ let lightboxIndex = 0;
   <p class="hero-sub" id="hero-address"></p>
   <div class="hero-price" id="hero-price"></div>
   <div class="hero-date" id="hero-date"></div>
+  <div class="hero-date" id="hero-occupancy" style="background:var(--blush);color:var(--rose-dark);margin-top:8px;"></div>
 </div>
 
 <!-- NAV -->
@@ -277,6 +279,7 @@ let lightboxIndex = 0;
       <div class="info-tile"><div class="tile-label">Sellers</div><div class="tile-value">Gary &amp; Jessie Leonard</div></div>
       <div class="info-tile"><div class="tile-label">Property Sold</div><div class="tile-value" style="font-size:14px;">2790 Pebble Stone Trail<br><span style="font-weight:400;color:var(--muted)">Xenia, OH 45385</span></div></div>
       <div class="info-tile"><div class="tile-label">Closing Date</div><div class="tile-value rose">May 20, 2026</div></div>
+      <div class="info-tile"><div class="tile-label">Occupancy / Move-Out</div><div class="tile-value rose">May 31, 2026</div></div>
       <div class="info-tile"><div class="tile-label">Sale Price</div><div class="tile-value rose">$465,000</div></div>
     </div>
   </div>
@@ -339,6 +342,12 @@ let lightboxIndex = 0;
   <div class="section-title">Your <span>Post-Sale Checklist</span></div>
   <div class="section-divider"></div>
   <p class="section-intro">Everything you need to wrap up now that the sale is done. Check items off as you go — your progress saves automatically.</p>
+  <div class="card rose-border" style="margin-bottom:28px;">
+    <h3>📅 Your Important Dates</h3>
+    <p><strong>Closing Date:</strong> May 20, 2026 — the sale is officially complete.</p>
+    <p style="margin-top:8px;"><strong>Occupancy / Move-Out Date: May 31, 2026</strong> — this is when utilities, insurance, and key handoff deadlines kick in. Base all move-out tasks below on this date, not the closing date.</p>
+    <p style="margin-top:8px;"><strong>Key Handoff:</strong> You and the buyers have each other's numbers — coordinate directly for the handoff on or before May 31. 🗝️</p>
+  </div>
   <div class="progress-wrap">
     <div class="progress-label"><span>Your Progress</span><span id="progress-pct">0%</span></div>
     <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
@@ -351,15 +360,15 @@ let lightboxIndex = 0;
     </div>
     <div class="checklist-item" data-key="c2" onclick="toggleCheck(this)">
       <div class="check-box"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div><div class="item-text">Cancel homeowner's insurance on sold property</div><div class="item-note">Only after confirming deed has transferred. Contact your agent for a pro-rated refund.</div></div>
+      <div><div class="item-text">Cancel homeowner's insurance on sold property</div><div class="item-note">Do NOT cancel until after your occupancy end date (May 31). You need coverage while you're still in the home. Cancel on June 1 and request a pro-rated refund.</div></div>
     </div>
     <div class="checklist-item" data-key="c3" onclick="toggleCheck(this)">
       <div class="check-box"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div><div class="item-text">Transfer or cancel utilities at sold property</div><div class="item-note">Electric, gas, water, trash — confirm final meter read dates match closing day</div></div>
+      <div><div class="item-text">Transfer or cancel utilities at sold property</div><div class="item-note">Keep utilities active through your occupancy end date (May 31). Schedule cancellation or transfer effective June 1 — confirm final meter read dates match your move-out.</div></div>
     </div>
     <div class="checklist-item" data-key="c4" onclick="toggleCheck(this)">
       <div class="check-box"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div><div class="item-text">Cancel or transfer internet, cable, security system</div><div class="item-note">These don't auto-transfer — call each provider directly</div></div>
+      <div><div class="item-text">Cancel or transfer internet, cable, security system</div><div class="item-note">Schedule cancellation effective May 31 (your occupancy end date) — call each provider directly, these don't auto-transfer</div></div>
     </div>
     <div class="checklist-item" data-key="c5" onclick="toggleCheck(this)">
       <div class="check-box"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -465,6 +474,7 @@ let lightboxIndex = 0;
     <div class="info-tile"><div class="tile-label">Sellers</div><div class="tile-value">Gary &amp; Jessie Leonard</div></div>
     <div class="info-tile"><div class="tile-label">Property Sold</div><div class="tile-value" style="font-size:14px;">2790 Pebble Stone Trail<br><span style="font-weight:400;color:var(--muted)">Xenia, OH 45385</span></div></div>
     <div class="info-tile"><div class="tile-label">Closing Date</div><div class="tile-value rose">May 20, 2026</div></div>
+    <div class="info-tile"><div class="tile-label">Occupancy End Date</div><div class="tile-value rose">May 31, 2026</div></div>
     <div class="info-tile"><div class="tile-label">Sale Price</div><div class="tile-value rose">$465,000</div></div>
   </div>
   <div class="card rose-border">
@@ -630,6 +640,7 @@ document.getElementById('hero-name').textContent = CLIENT.firstName;
 document.getElementById('hero-address').textContent = 'Sold: ' + CLIENT.address;
 document.getElementById('hero-price').textContent = 'Sold for ' + CLIENT.salePrice;
 document.getElementById('hero-date').textContent = 'Closed ' + CLIENT.closedDate;
+document.getElementById('hero-occupancy').textContent = 'Occupancy / Move-Out: ' + CLIENT.occupancyDate;
 
 // BUILD PHOTO GALLERY
 function buildGallery() {
