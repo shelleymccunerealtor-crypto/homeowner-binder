@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eXp Realty Agent Transfer Checklist</title>
+<style>
+:root {
+  color-scheme: light;
+  --cream: #F9EFE7;
+  --blush: #E8C4B8;
+  --rose: #D4547E;
+  --rose-light: #EE96F1;
+  --black: #1A1A1A;
+  --white: #FFFFFF;
+  --gray: #6B7280;
+  --border: #E5E7EB;
+  --success: #4CAF82;
+  --warning: #E8A020;
+  --danger: #FF5252;
+}
+* { box-sizing: border-box; margin:0; padding:0; }
+body {
+  font-family: Georgia, serif;
+  background: var(--cream);
+  color: var(--black);
+  padding: 0;
+}
+.wrap { max-width: 1000px; margin: 0 auto; padding: 20px 20px 60px; }
+
+/* HEADER */
+.header {
+  background: linear-gradient(135deg, #1A1A1A 0%, #2d1a22 60%, #3d1a2a 100%);
+  color: white;
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: "";
+  position: absolute; top:-40px; right:-40px; width:160px; height:160px; border-radius:50%;
+  background: radial-gradient(circle, rgba(238,150,241,.25), transparent 70%);
+}
+.header h1 { font-size: 1.55rem; font-weight: normal; letter-spacing: .3px; }
+.header h1 span { color: var(--rose-light); }
+.header .tagline { font-size: .9rem; color: rgba(255,255,255,.85); margin-top: 8px; line-height: 1.5; max-width: 640px; }
+
+/* TABS */
+.tab-bar { display:flex; gap:6px; margin-bottom:16px; flex-wrap:wrap; }
+.tab-btn {
+  background: white; border: 1px solid var(--border); color: var(--black);
+  padding: 8px 16px; border-radius: 8px; font-family: Georgia, serif;
+  font-size: .85rem; cursor:pointer; transition: all .15s;
+}
+.tab-btn:hover { border-color: var(--rose); }
+.tab-btn.active { background: var(--rose); color:white; border-color: var(--rose); }
+.tab-content { display:none; }
+.tab-content.active { display:block; }
+
+/* CARD */
+.card {
+  background: white; border-radius: 12px; border:1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0,0,0,.05); padding: 18px 20px; margin-bottom: 16px;
+}
+.card h2 { font-size: 1.05rem; margin-bottom: 8px; color: var(--black); }
+.card h3 { font-size: .95rem; margin-bottom: 6px; }
+.card p, .card li { font-size: .88rem; line-height: 1.55; }
+
+/* CONTROLS ROW */
+.controls {
+  display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:16px;
+  background:white; border:1px solid var(--border); border-radius:12px; padding:14px 18px;
+}
+.controls label { font-size:.78rem; color:var(--gray); display:block; margin-bottom:3px; }
+.controls select, .controls input[type=text] {
+  font-family: Georgia, serif; padding:7px 10px; border-radius:8px; border:1px solid var(--border);
+  font-size:.85rem; min-width:160px;
+}
+.btn {
+  background: linear-gradient(135deg, var(--rose), #b03060); color:white; border:none;
+  padding: 8px 16px; border-radius:8px; font-family:Georgia, serif; font-size:.82rem;
+  cursor:pointer; font-weight:bold; letter-spacing:.2px;
+}
+.btn:hover { opacity:.88; }
+.btn-secondary {
+  background: white; color: var(--rose); border: 1px solid var(--rose);
+  padding: 8px 16px; border-radius: 8px; font-family: Georgia, serif; font-size: .82rem; cursor:pointer;
+}
+
+/* PROGRESS */
+.progress-overall {
+  background:white; border:1px solid var(--border); border-radius:12px; padding:16px 20px; margin-bottom:16px;
+}
+.progress-overall .top-row { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px; }
+.progress-overall .pct { font-size:1.6rem; font-weight:bold; color:var(--rose); }
+.bar-track { background:var(--border); border-radius:6px; height:10px; overflow:hidden; }
+.bar-fill { background: linear-gradient(90deg, var(--rose), var(--rose-light)); height:100%; transition: width .3s; }
+
+/* TIP LINE */
+.tip-line {
+  background:#FCE9C7; color:#7a5100; border-radius:10px; padding:10px 16px; font-size:.82rem;
+  margin-bottom:14px; line-height:1.5;
+}
+
+/* PHASE ACCORDION */
+.phase { background:white; border:1px solid var(--border); border-radius:12px; margin-bottom:10px; overflow:hidden; }
+.phase-head {
+  display:flex; align-items:center; justify-content:space-between; padding:14px 18px; cursor:pointer;
+  gap:10px;
+}
+.phase-head:hover { background: #fafafa; }
+.phase-title { font-size:.92rem; font-weight:bold; display:flex; align-items:center; gap:10px; }
+.status-pill {
+  font-size:.68rem; padding:3px 10px; border-radius:20px; font-weight:bold; white-space:nowrap;
+}
+.status-not { background:#F0F0F0; color:var(--gray); }
+.status-progress { background:#FCE9C7; color:#8a5a00; }
+.status-done { background:#DCF3E8; color:#1f7a4d; }
+.phase-meta { display:flex; align-items:center; gap:10px; }
+.mini-bar { width:70px; height:6px; background:var(--border); border-radius:4px; overflow:hidden; }
+.mini-fill { height:100%; background: var(--rose); }
+.chevron { transition: transform .2s; font-size:.8rem; color:var(--gray); }
+.phase.open .chevron { transform: rotate(90deg); }
+.phase-body { display:none; padding: 0 18px 16px; border-top:1px solid var(--border); }
+.phase.open .phase-body { display:block; padding-top:12px; }
+.phase-intro { font-size:.82rem; color:var(--gray); font-style:italic; margin-bottom:10px; line-height:1.5; }
+
+.item-row { display:flex; align-items:flex-start; gap:10px; padding:6px 0; }
+.item-row input[type=checkbox] { margin-top:3px; width:16px; height:16px; accent-color: var(--rose); flex-shrink:0; }
+.item-row label { font-size:.86rem; line-height:1.5; cursor:pointer; }
+.item-row.checked label { color: var(--gray); text-decoration: line-through; }
+.item-row label em { color: var(--rose); font-style: italic; }
+.item-row label b { font-weight:bold; color:var(--black); }
+
+.callout {
+  margin-top:10px; padding:10px 14px; border-radius:8px; font-size:.82rem; line-height:1.5;
+}
+.callout.next { background: #FCE9C7; color:#7a5100; }
+.callout.where { background: #E9EDF4; color:#19469D; }
+
+/* WHATS NEXT BANNER */
+.next-banner {
+  background: linear-gradient(135deg, var(--rose), #b03060); color:white; border-radius:12px;
+  padding:16px 20px; margin-bottom:16px; font-size:.9rem; line-height:1.5;
+}
+.next-banner b { display:block; font-size:.72rem; letter-spacing:.5px; opacity:.85; margin-bottom:4px; text-transform:uppercase; }
+
+/* FAQ */
+.faq-item { margin-bottom:14px; }
+.faq-item .q { font-weight:bold; font-size:.88rem; margin-bottom:3px; }
+.faq-item .a { font-size:.85rem; color:#333; line-height:1.5; }
+
+.legend { display:flex; gap:16px; flex-wrap:wrap; font-size:.78rem; color:var(--gray); margin-bottom:10px; }
+.legend span { display:flex; align-items:center; gap:5px; }
+.dot { width:9px; height:9px; border-radius:50%; display:inline-block; }
+
+/* TRACKER TAB */
+.tracker-grid { display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:12px; }
+@media (max-width:700px){ .tracker-grid { grid-template-columns:1fr; } }
+.tracker-grid label { font-size:.78rem; color:var(--gray); display:block; margin-bottom:3px; }
+.tracker-grid input, .tracker-grid textarea {
+  width:100%; font-family:Georgia, serif; padding:7px 10px; border-radius:8px; border:1px solid var(--border); font-size:.85rem;
+}
+.tracker-table-wrap { overflow-x:auto; }
+.tracker-table { width:100%; border-collapse:collapse; font-size:.8rem; margin-top:8px; min-width:640px; }
+.tracker-table th, .tracker-table td { border:1px solid var(--border); padding:6px 8px; text-align:left; }
+.tracker-table th { background:#fafafa; font-size:.75rem; }
+.tracker-table input, .tracker-table select { width:100%; border:none; font-family:Georgia, serif; font-size:.8rem; padding:3px; background:transparent; }
+.tracker-table input:focus, .tracker-table select:focus { background:#FCE9C7; outline:none; }
+.tracker-actions { display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; }
+
+.footer-note { text-align:center; font-size:.75rem; color:var(--gray); margin-top:24px; line-height:1.7; }
+.footer-note b { color: var(--rose); font-weight:bold; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <h1>eXp Realty Agent Transfer <span>Checklist</span></h1>
+    <div class="tagline">Your complete game plan for making the move to eXp Realty — nothing skipped, nothing forgotten, and no guessing what comes next.</div>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="about">How To Use</button>
+    <button class="tab-btn" data-tab="checklist">Checklist</button>
+    <button class="tab-btn" data-tab="tracker">Your Tracking Sheet</button>
+    <button class="tab-btn" data-tab="faq">FAQ</button>
+  </div>
+
+  <!-- ABOUT TAB -->
+  <div class="tab-content active" id="tab-about">
+    <div class="card">
+      <h2>How This Works</h2>
+      <p>Work through the <b>Checklist</b> tab phase by phase, top to bottom — it's built in the order that actually makes sense (pick your sponsor, build your brand, quietly get your ducks in a row, THEN notify your current broker and pull the trigger). Check items off as you go; your progress saves automatically right in this file, in your own browser, and will still be there next time you open it.</p>
+      <p style="margin-top:10px;">Use the <b>Your Tracking Sheet</b> tab to log your sponsor/co-sponsor info, the details you'll need for your application, and every platform/login you touch along the way. You can download it as a CSV any time and drop it straight into Google Sheets.</p>
+      <p style="margin-top:10px;"><b>Rule #1, no matter what:</b> you cannot conduct business under eXp — no advertising, no showings, no offers — until your license shows ACTIVE with your state's licensing authority. No exceptions.</p>
+      <p style="margin-top:10px;"><b>On sponsors and co-sponsors:</b> you get ONE chance to name both, and the window to add a co-sponsor is short and closes fast. Don't sit on this decision — get it locked in first, before anything else.</p>
+      <p style="margin-top:10px;"><b>Keep your sponsor/co-sponsor posted:</b> update them as you move through each phase so they know exactly where you're at — don't wait until you're stuck to loop them in.</p>
+    </div>
+  </div>
+
+  <!-- CHECKLIST TAB -->
+  <div class="tab-content" id="tab-checklist">
+
+    <div class="progress-overall">
+      <div class="top-row">
+        <div>Your overall progress</div>
+        <div class="pct" id="overallPct">0%</div>
+      </div>
+      <div class="bar-track"><div class="bar-fill" id="overallBar" style="width:0%"></div></div>
+    </div>
+
+    <div class="next-banner" id="nextBanner">
+      <b>What's Next</b>
+      <span id="nextBannerText">Start with Phase 1 below.</span>
+    </div>
+
+    <div class="tip-line">💡 Keep your sponsor/co-sponsor posted on your progress as you move through each phase — update them as you go so they know where you're at.</div>
+
+    <div class="legend">
+      <span><span class="dot" style="background:#B0B0B0"></span> Not started</span>
+      <span><span class="dot" style="background:#E8A020"></span> In progress</span>
+      <span><span class="dot" style="background:#4CAF82"></span> Complete</span>
+    </div>
+
+    <div id="phasesContainer"></div>
+  </div>
+
+  <!-- TRACKER TAB -->
+  <div class="tab-content" id="tab-tracker">
+    <div class="card">
+      <h2>Sponsor & Co-Sponsor</h2>
+      <div class="tracker-grid">
+        <div><label>Sponsor name (as listed on eXp)</label><input type="text" id="trk-sponsor"></div>
+        <div><label>Co-Sponsor name (as listed on eXp)</label><input type="text" id="trk-cosponsor"></div>
+        <div><label>Date selected</label><input type="text" id="trk-date" placeholder="e.g. 7/28/2026"></div>
+        <div><label>Notes (support/community access each offers)</label><input type="text" id="trk-notes"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Info to Gather</h2>
+      <div class="tracker-grid">
+        <div><label>Bank account + routing number</label><input type="text" id="trk-bank"></div>
+        <div><label>NRDS #</label><input type="text" id="trk-nrds"></div>
+        <div><label>EIN (if LLC/PLLC)</label><input type="text" id="trk-ein"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Platform & Login Tracker</h2>
+      <p style="margin-bottom:8px;">Log every account you touch during your transfer — your new login/handle, the link, and where you're at.</p>
+      <div class="tracker-table-wrap">
+        <table class="tracker-table" id="trackerTable">
+          <thead>
+            <tr><th>Platform</th><th>Old Login/Handle</th><th>New Login/Handle</th><th>Link</th><th>Status</th><th></th></tr>
+          </thead>
+          <tbody id="trackerTableBody"></tbody>
+        </table>
+      </div>
+      <div class="tracker-actions">
+        <button class="btn-secondary" id="addRowBtn">+ Add Row</button>
+        <button class="btn" id="downloadCsvBtn">Download as CSV</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ TAB -->
+  <div class="tab-content" id="tab-faq">
+    <div class="card" id="faqContainer"></div>
+    <div class="card">
+      <h2>A Quick Disclaimer</h2>
+      <p>This checklist is general guidance built from real onboarding experience — it isn't legal, tax, or state-specific licensing advice. Confirm the details that matter most (contracts, non-competes, tax filing, your exact state process) with your eXp onboarding team, your sponsor/co-sponsor, and your own attorney or accountant.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">Built by <b>Shelley McCune</b> — in partnership with <b>Liz Brown &amp; The Agent Crew</b> and <b>Stacey McVey &amp; The Rebel Agent Posse</b> (eXp Realty).<br>Questions about anything on this list? Reach out to whoever sent you this file.</div>
+
+</div>
+
+<script>
+const PHASES = [
+{ id:"p1", title:"Phase 1 — Choose Your Sponsor & Co-Sponsor + Get Your Info Together", whatsNext:"Move into your Brand & Content Audit while this is still fresh.", whereToLook:"Your sponsor/co-sponsor directly", items:[
+ "Confirm your sponsor AND co-sponsor before you do anything else — you get ONE chance to name both, and the window to add a co-sponsor is short and closes fast",
+ "Make sure you know exactly what support and/or community access you're getting from each — a sponsor and co-sponsor can offer different things",
+ "Get their names exactly as they're listed/registered on the eXp site — this is what goes on your application",
+ "Ask your sponsor/co-sponsor for an invite to their team's private community before you sign anything",
+ "Show up to a live team call or training before you transfer, if offered",
+ "If comparing brokerages/splits, do that math now — not after signing",
+ "Set up a NEW dedicated Gmail account for your business (not your current brokerage email)",
+ "Set up a folder in your Google Drive to hold everything for your brokerage switch — you'll be dropping info into it all along the way",
+ "Start your tracking spreadsheet now (see the Your Tracking Sheet tab) and log: bank account + routing number, NRDS #, and EIN if you're an LLC/PLLC — confirm any extra entity paperwork your state requires",
+ "If part of a team, gather team details (team name + every member's info) for the spreadsheet too",
+ "Decide in advance: Agent Equity Program — opt IN or OUT"
+]},
+{ id:"p2", title:"Phase 2 — Brand & Content Audit", whatsNext:"Move into your Quiet Prep phase — while you're still at your current brokerage.", whereToLook:"eXp brand kit; your sponsor/co-sponsor's own profiles as a reference", items:[
+ "Log into each of your social media accounts: Instagram, Facebook, LinkedIn, TikTok, Pinterest, YouTube, Google Business Profile, Realtor.com, Homes.com, Zillow, and your personal website",
+ "Add the login link for each one to your tracking spreadsheet as you go",
+ "Make sure your username/handle and display name reflect the brand you're building — e.g. YourNameRealtor@gmail.com or @YourNameRealtor",
+ "Check with your sponsor and/or co-sponsor and review their bios as a setup reference example",
+ "Update your bio everywhere with wording you actually own",
+ "Start phasing out corporate-style/auto-feed content tied to your old brokerage",
+ "Shift visual brand away from your old brokerage's colors if it's built entirely around them",
+ "Thinking about a logo refresh? This is a good time to do it",
+ "Make sure every email address listed on any profile reflects your new business email",
+ "Explore eXp's brand kit (logos, colors, fonts, templates) before your transfer date",
+ "Start building your buyer/seller guides in your own template, with updated brokerage info and your updated contact info",
+ "Heads up: your reviews on Google/Zillow/Realtor.com likely won't transfer with you — screenshot or save your favorites now just in case (more on this later)",
+ "Log every platform, link, and login into your tracking spreadsheet as you go — future you will thank you"
+]},
+{ id:"p3", title:"Phase 3 — Quiet Prep: While You're Still at Your Current Brokerage", intro:"This phase is about getting ready, not switching over yet — you can't fully update everything until you're actually active with eXp, so treat this as staging, not going live.", whatsNext:"Move into Export & Protect Your Data.", whereToLook:"eXplore.eXprealty.com", items:[
+ "Make your new Gmail your default account (not your old brokerage's Outlook/email) — but do NOT set an out-of-office reply yet, wait until you're ready to make the switch",
+ "Update every site tied to your old email: local board, MLS, email database/CRM, NAR/state association",
+ "Update your email signature everywhere with the new account",
+ "Switch phone and computer logins tied to your old brokerage email",
+ "Start cleaning out your current office space, if applicable",
+ "Confirm login access to your state's licensing portal using your new Gmail account",
+ "Clean up and organize your client database, then export it to a CSV file",
+ "Update your task/process system (Trello, etc.) to match eXp's workflow — <em>Hint: use the Claude Extension for help with this</em>",
+ "Update your transaction email templates — <em>Hint: use the Claude Extension for help with this</em>",
+ "Get an introduction to Boards (boards.com) for your listing pages — <em>check with your sponsor/co-sponsor for an affiliate link</em>",
+ "Start reading eXp's official welcome/onboarding resource hub"
+]},
+{ id:"p4", title:"Phase 4 — Export & Protect Your Data", whatsNext:"Move into your Final Week Prep.", whereToLook:"Your new Google Drive folder; designation institutes directly", items:[
+ "If any contacts or email are owned by your previous brokerage, export them now — to a CSV file, saved in the folder in your new Google Drive for your brokerage switch",
+ "Download at least the last 3 years of your Dotloop transaction documents",
+ "Make sure Dotloop is updated with your new current email address — you'll still be able to log in and reference the old account, you just won't be able to work out of it",
+ "Save everything in your new Google Drive, in your brokerage-switch folder",
+ "Make copies of any contract templates and addenda you currently use",
+ "Get familiar with the eXp/state association and your local association's contract versions before your transfer date",
+ "Update your broker affiliation with any professional designation institutes (CRS, ABR, SRES, GRI, etc.)"
+]},
+{ id:"p5", title:"Phase 5 — Final Week Prep", whatsNext:"Move into the Join Application & ICA.", whereToLook:"Your accountant (for the dual-1099 question)", items:[
+ "Draft (don't send yet) your SOI announcement email",
+ "Think about pulling/exporting your current brokerage emails somewhere safe before you lose access — an Outlook export, forwarding into your new Gmail, or saving to a hard drive/Google Drive all work",
+ "Pull your 1099 from your current brokerage's platform before losing access",
+ "Note you'll likely get TWO 1099s this tax year — flag it for your accountant",
+ "Draft (don't send yet) your formal letter of transfer, a list of pending deals, and your Dotloop reactivation request"
+]},
+{ id:"p6", title:"Phase 6 — Complete the Join Application & ICA", whatsNext:"Now it's time to notify your current broker.", whereToLook:"join.exprealty.com", items:[
+ "Complete the Join Application at join.exprealty.com with your NEW business email",
+ "<b>Name your sponsor and co-sponsor exactly as they're listed on the eXp application — this is where it becomes official</b>",
+ "Sign the Independent Contractor Agreement (ICA)",
+ "Note team / domestic team / out-of-state license details on the application",
+ "Select payment method for Initial Join Fee + Monthly Fee (N/A the other option)",
+ "Save your Personal Status Code",
+ "Watch for the \"Welcome Aboard!\" email"
+]},
+{ id:"p7", title:"Phase 7 — Notify Your Broker & Transfer Your License", whatsNext:"Move into Day of Transfer & Resolving Pending Business.", whereToLook:"Your onboarding contact", items:[
+ "Flag active listings to your sponsor/co-sponsor before notifying your current broker",
+ "Back up your sale files before losing access to your current system",
+ "Check your current ICA/agreement for non-solicit/non-compete language",
+ "This is your last step before you flip the switch — notify your current broker by email so it's in writing. In that same email: let them know you're transferring, list every active listing/pending transaction you have, and ask them to confirm commission-handling terms plus what happens to any earnest money/trust deposits on each",
+ "Right after you've sent that email, set your out-of-office autoreply on your old brokerage email with your new contact info",
+ "Check with eXp to see whether they handle your state's license transfer for you or if you need to do it yourself — ask your onboarding contact if you need help",
+ "Have the eXp brokerage license # for your state ready",
+ "If you answered YES to any ethical/disciplinary question, upload explanation + docs immediately",
+ "Check if your state requires registering a Preferred/DBA name",
+ "Monitor your pending transfer status with the state so you get notified the moment it's active",
+ "Keep paying your current board/MLS dues during the pending transfer",
+ "Email your onboarding specialist once submitted, with confirmation/receipt"
+]},
+{ id:"p8", title:"Phase 8 — Day of Transfer & Resolve Pending Business", whatsNext:"Move into Housekeeping & Loose Ends with your old brokerage.", whereToLook:"Your state's license lookup tool", items:[
+ "Confirm your license shows ACTIVE under eXp at your state's licensing portal",
+ "Now send your SOI/announcement email + social post",
+ "Notify referral partners (lenders, title companies, inspectors, contractors) of your move",
+ "Confirm your E&O coverage transition — what's covered by old vs. new brokerage",
+ "Plan the MLS/board access transition for any assistant or team member",
+ "Change/create your email signature (pull the template — see Branding phase)",
+ "Follow eXp's onboarding steps (see eXplore.eXprealty.com) — and check with your sponsor/co-sponsor for any onboarding tips, tricks, or additional onboarding they offer within their community",
+ "Watch your inbox — the eXp onboarding email sequence starts now; read it in order"
+]},
+{ id:"p9", title:"Phase 9 — Housekeeping & Loose Ends with Your Old Brokerage", whatsNext:"Move into Setting Up Your eXp Systems.", whereToLook:"Your own records", items:[
+ "Return any company-issued devices, lockbox keys, or equipment",
+ "Check for sign-on bonus / marketing fund clawback clauses tied to early departure",
+ "Update your CE (continuing education) provider account with your new brokerage",
+ "Confirm old-brokerage signs/riders are pulled from active listings promptly",
+ "Notify your business bank account / business insurance of the brokerage change (if LLC/PLLC)",
+ "Update print ads, chamber listings, community sponsorships referencing your old brokerage",
+ "Final gut-check: anything public still showing your name + old brokerage's logo?"
+]},
+{ id:"p10", title:"Phase 10 — Set Up Your eXp Systems", intro:"You'll receive a sequence of onboarding emails from eXp that walk you through each of these, in order — eXp also runs a full onboarding program that steps you through this entire process, so lean on that as your go-to reference too.", whatsNext:"Move into MLS, Lockbox & Board Membership.", whereToLook:"expenterprise.com; the Hub; expertcare@exprealty.net", items:[
+ "Get your eXp Email Alias (first.last@exprealty.com) — this is mandatory for all eXp agents, in addition to the personal/business Gmail you already set up",
+ "Activate your eXp Passport Account; change your password",
+ "Complete your Enterprise Profile, including your market areas",
+ "Sign up for a CRM — eXp offers several options, pick the one that fits you",
+ "Gather your Sphere of Influence / past client contacts for your CRM import",
+ "Dotloop enrollment (if applicable) — make it your default profile once active",
+ "Set up SkySlope; confirm your correct time zone",
+ "Download the Hub (eXp's community platform) and complete your profile",
+ "Complete your Shareworks account if you opted into Agent Equity",
+ "Set up direct deposit for commissions",
+ "Ask your preferred title company about online Earnest Money options",
+ "Enroll in eXp Agent Healthcare if interested — check the enrollment window",
+ "Team Leaders: watch for your Concierge Assistance email + complete the Team Leader Addendum"
+]},
+{ id:"p11", title:"Phase 11 — MLS, Lockbox & Board Membership", whatsNext:"Once MLS + lockbox are active, you're cleared to list and show — move into Branding, Signs & Marketing.", whereToLook:"Your onboarding specialist", items:[
+ "Complete the Licensee Application for Membership/Modification for your local MLS",
+ "Watch for the profile-setup email containing your MLS username",
+ "Watch for the lockbox system welcome/activation email (SentriLock, Supra, etc.)",
+ "If secondary MLS/board, ask directly what their transfer paperwork requires",
+ "Complete an identity-sharing/permission form for a licensed admin/assistant if needed",
+ "Confirm local board + MLS dues are paid and orientations completed, if applicable"
+]},
+{ id:"p12", title:"Phase 12 — Branding, Signs & Marketing Approval", whatsNext:"Move into Public-Facing Updates & Online Reputation.", whereToLook:"Canva for eXp agents", items:[
+ "Review eXp Brand Guidelines; check with your state broker for any additional guidance",
+ "Update your email signature — templates live in Canva for eXp agents",
+ "Confirm your signature includes the required wire-fraud warning + confidentiality notice",
+ "Change/record your voicemail greeting with your new brokerage info",
+ "Change out your signs and riders",
+ "Get marketing approval from your state broker before ordering anything",
+ "Explore Canva for eXp agents for flyers, letterhead, and social templates"
+]},
+{ id:"p13", title:"Phase 13 — Public-Facing Updates & Online Reputation", whatsNext:"Move into Compliance, Meetings & Community.", whereToLook:"N/A — manual legwork, platform by platform", items:[
+ "Google yourself and check every public-facing result",
+ "Double-check: Zillow, Realtor.com, Homes.com, Google Business Profile, Facebook, Instagram, LinkedIn, TikTok, YouTube, Pinterest, and your website",
+ "Update MLS headers/footers on marketing pieces",
+ "Update ancillary service listings (home warranty, HSA, etc.)",
+ "Double-check your voicemail greeting reflects your new brokerage",
+ "Reviews may not transfer to your new profile (if applicable) — screenshot or save your best ones before assuming they'll carry over, then plan to request fresh ones later",
+ "Double-check your full platform tracker (Google, GoDaddy, socials, CRM, HomeLight, LoopNet, Yelp/Nextdoor/Houzz, Trello, iCloud) — see your Tracking Sheet tab",
+ "Update paid ad accounts (GBP ads, Facebook Ads Manager) to the correct brokerage",
+ "Confirm domain/DNS access isn't tied to your old brokerage's account"
+]},
+{ id:"p14", title:"Phase 14 — Compliance, Meetings & Community", whatsNext:"You're fully onboarded — welcome to eXp!", whereToLook:"eXp World; your state's Hub group", items:[
+ "Attend your state's Broker Team Meet & Greet",
+ "Attend your state's weekly team meeting in eXp World",
+ "Download the eXp World app",
+ "Attend any free calls your sponsor and/or co-sponsor host or invite you to — for networking, connection, and collaboration on marketing, processes, social media, content creation, power hours, mentorship, sponsorship, and more",
+ "Join your state's community group(s) and any relevant regional groups",
+ "Watch for mentor program enrollment if new / fewer than 3 transactions",
+ "New agents: complete fingerprinting/background check within your required window",
+ "Save your NRDS # for board/association purposes"
+]}
+];
+
+const FAQ = [
+["Can I start doing business as soon as I sign with eXp?","No. In any state, you cannot advertise, show property, write offers, or present yourself as an eXp agent until your license shows ACTIVE under eXp with your state's licensing authority."],
+["What if my state doesn't have the same systems (SentriLock, specific MLS names, etc.)?","The eXp-side systems (Enterprise, your CRM, SkySlope, Dotloop, the Hub, Agent Equity) are identical nationwide. Only the state license portal, local MLS, and lockbox vendor change."],
+["Do I really need both Dotloop and SkySlope?","SkySlope is required for eXp compliance on every transaction. A majority of agents use Dotloop alongside it, but Dotloop itself is not required."],
+["What happens to commissions on pending deals when I transfer?","Varies by brokerage policy — get it in writing from your current broker before you transfer, not after."],
+["I have a team — does anything change?","Yes — there's a completely different setup and onboarding process for teams. Please check with your sponsor or co-sponsor."],
+["What if I hold a license in another state too?","Note it on your Join Application — cross-state licensing adds paperwork, and the broker team will guide you through it."],
+["What if I'm a broker (not just an agent) transferring?","Do not use the standard online application — email your state's onboarding team directly."],
+["How long does the whole process take?","A clean online transfer can activate the same day or within days. Paper/mailed applications typically take 2–3 weeks. New (unlicensed) applicants: 4–6 weeks plus background-check turnaround."],
+["What's the Agent Equity Program?","An optional program where a % of commission goes toward eXp stock at a discount. Purchases/awards post at the end of the following month. Check your eXp Agent Toolkit for more information."],
+["Do I get one 1099 or two in the transfer year?","Expect two — one from each brokerage. Flag this for your accountant ahead of tax season."],
+["Why does the checklist wait to have me notify my broker until so late?","Doing your prep quietly first — brand, data export, application, all of it — means the conversation with your current broker happens once, on your terms, right before you're ready to flip the switch. Less time for things to get awkward."]
+];
+
+// ---------- CHECKLIST STATE (stored locally in this file's browser) ----------
+const STORAGE_KEY = "expTransferChecklist_v3";
+function loadData(){
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || { checks:{} }; }
+  catch(e){ return { checks:{} }; }
+}
+function saveData(d){ localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
+let DATA = loadData();
+
+function totalItemCount(){ return PHASES.reduce((s,p)=>s+p.items.length,0); }
+function phaseCheckedCount(phaseId){
+  const phase = PHASES.find(p=>p.id===phaseId);
+  let n=0;
+  phase.items.forEach((_,i)=>{ if(DATA.checks[phaseId+"_"+i]) n++; });
+  return n;
+}
+function overallCheckedCount(){
+  let n=0;
+  PHASES.forEach(p=>n+=phaseCheckedCount(p.id));
+  return n;
+}
+function statusForPhase(phaseId){
+  const phase = PHASES.find(p=>p.id===phaseId);
+  const c = phaseCheckedCount(phaseId);
+  if(c===0) return "not";
+  if(c===phase.items.length) return "done";
+  return "progress";
+}
+function firstIncompletePhase(){
+  for(const p of PHASES){
+    if(phaseCheckedCount(p.id) < p.items.length) return p;
+  }
+  return null;
+}
+
+function renderTop(){
+  const total = totalItemCount();
+  const checked = overallCheckedCount();
+  const pct = Math.round((checked/total)*100);
+  document.getElementById("overallPct").textContent = pct+"%";
+  document.getElementById("overallBar").style.width = pct+"%";
+  const banner = document.getElementById("nextBannerText");
+  const fp = firstIncompletePhase();
+  banner.textContent = fp ? (fp.title + ": " + fp.whatsNext) : "All phases complete — fully onboarded! 🎉";
+}
+
+function renderPhases(){
+  const container = document.getElementById("phasesContainer");
+  container.innerHTML = "";
+  PHASES.forEach(phase=>{
+    const div = document.createElement("div");
+    div.className = "phase";
+    div.id = "phase-"+phase.id;
+
+    const checkedCount = phaseCheckedCount(phase.id);
+    const pct = Math.round((checkedCount/phase.items.length)*100);
+    const status = statusForPhase(phase.id);
+    const statusLabel = status==="done" ? "Complete" : status==="progress" ? "In Progress" : "Not Started";
+    const statusClass = status==="done" ? "status-done" : status==="progress" ? "status-progress" : "status-not";
+
+    const head = document.createElement("div");
+    head.className = "phase-head";
+    head.innerHTML = `
+      <div class="phase-title"><span class="chevron">▶</span> ${phase.title}</div>
+      <div class="phase-meta">
+        <span class="status-pill ${statusClass}">${statusLabel}</span>
+        <div class="mini-bar"><div class="mini-fill" style="width:${pct}%"></div></div>
+        <span style="font-size:.72rem;color:var(--gray);">${checkedCount}/${phase.items.length}</span>
+      </div>
+    `;
+    head.addEventListener("click", ()=>{ div.classList.toggle("open"); });
+
+    const body = document.createElement("div");
+    body.className = "phase-body";
+
+    if(phase.intro){
+      const introP = document.createElement("p");
+      introP.className = "phase-intro";
+      introP.textContent = phase.intro;
+      body.appendChild(introP);
+    }
+
+    phase.items.forEach((text, i)=>{
+      const isChecked = !!DATA.checks[phase.id+"_"+i];
+      const row = document.createElement("div");
+      row.className = "item-row" + (isChecked ? " checked" : "");
+      const cid = "chk_"+phase.id+"_"+i;
+      row.innerHTML = `<input type="checkbox" id="${cid}" ${isChecked?"checked":""}><label for="${cid}">${text}</label>`;
+      const cb = row.querySelector("input");
+      cb.addEventListener("change", ()=>{
+        DATA.checks[phase.id+"_"+i] = cb.checked;
+        saveData(DATA);
+        row.classList.toggle("checked", cb.checked);
+        renderPhaseHeader(phase);
+        renderTop();
+      });
+      body.appendChild(row);
+    });
+
+    const nextCallout = document.createElement("div");
+    nextCallout.className = "callout next";
+    nextCallout.innerHTML = "<b>What's Next →</b> " + phase.whatsNext;
+    const whereCallout = document.createElement("div");
+    whereCallout.className = "callout where";
+    whereCallout.innerHTML = "<b>Where To Look →</b> " + phase.whereToLook;
+
+    body.appendChild(nextCallout);
+    body.appendChild(whereCallout);
+
+    div.appendChild(head);
+    div.appendChild(body);
+    container.appendChild(div);
+  });
+}
+
+function renderPhaseHeader(phase){
+  const div = document.getElementById("phase-"+phase.id);
+  const checkedCount = phaseCheckedCount(phase.id);
+  const pct = Math.round((checkedCount/phase.items.length)*100);
+  const status = statusForPhase(phase.id);
+  const statusLabel = status==="done" ? "Complete" : status==="progress" ? "In Progress" : "Not Started";
+  const statusClass = status==="done" ? "status-done" : status==="progress" ? "status-progress" : "status-not";
+  div.querySelector(".status-pill").className = "status-pill "+statusClass;
+  div.querySelector(".status-pill").textContent = statusLabel;
+  div.querySelector(".mini-fill").style.width = pct+"%";
+  div.querySelector(".phase-meta span:last-child").textContent = checkedCount+"/"+phase.items.length;
+}
+
+function renderFaq(){
+  const c = document.getElementById("faqContainer");
+  c.innerHTML = "<h2>Frequently Asked Questions</h2>";
+  FAQ.forEach(([q,a])=>{
+    const item = document.createElement("div");
+    item.className = "faq-item";
+    item.innerHTML = `<div class="q">Q: ${q}</div><div class="a">A: ${a}</div>`;
+    c.appendChild(item);
+  });
+}
+
+// ---------- TRACKER SHEET STATE ----------
+const TRACKER_KEY = "expTransferTracker_v1";
+const DEFAULT_ROWS = ["Google / Gmail","Instagram","Facebook","LinkedIn","TikTok","Pinterest","YouTube",
+  "Google Business Profile","Realtor.com","Homes.com","Zillow","Personal Website","MLS","Local Board / NAR",
+  "Dotloop","CRM (eXp)","Canva"];
+
+function loadTracker(){
+  try {
+    const t = JSON.parse(localStorage.getItem(TRACKER_KEY));
+    if(t) return t;
+  } catch(e){}
+  return {
+    sponsor:"", cosponsor:"", date:"", notes:"",
+    bank:"", nrds:"", ein:"",
+    rows: DEFAULT_ROWS.map(name => ({ platform:name, oldLogin:"", newLogin:"", link:"", status:"Not started" }))
+  };
+}
+function saveTracker(){ localStorage.setItem(TRACKER_KEY, JSON.stringify(TRACKER)); }
+let TRACKER = loadTracker();
+
+function renderTrackerFields(){
+  document.getElementById("trk-sponsor").value = TRACKER.sponsor || "";
+  document.getElementById("trk-cosponsor").value = TRACKER.cosponsor || "";
+  document.getElementById("trk-date").value = TRACKER.date || "";
+  document.getElementById("trk-notes").value = TRACKER.notes || "";
+  document.getElementById("trk-bank").value = TRACKER.bank || "";
+  document.getElementById("trk-nrds").value = TRACKER.nrds || "";
+  document.getElementById("trk-ein").value = TRACKER.ein || "";
+
+  ["trk-sponsor","trk-cosponsor","trk-date","trk-notes","trk-bank","trk-nrds","trk-ein"].forEach(id=>{
+    document.getElementById(id).addEventListener("input", (e)=>{
+      const map = { "trk-sponsor":"sponsor","trk-cosponsor":"cosponsor","trk-date":"date","trk-notes":"notes","trk-bank":"bank","trk-nrds":"nrds","trk-ein":"ein" };
+      TRACKER[map[id]] = e.target.value;
+      saveTracker();
+    });
+  });
+}
+
+function renderTrackerTable(){
+  const body = document.getElementById("trackerTableBody");
+  body.innerHTML = "";
+  TRACKER.rows.forEach((row, idx)=>{
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><input type="text" value="${row.platform.replace(/"/g,'&quot;')}" data-field="platform" data-idx="${idx}"></td>
+      <td><input type="text" value="${row.oldLogin.replace(/"/g,'&quot;')}" data-field="oldLogin" data-idx="${idx}"></td>
+      <td><input type="text" value="${row.newLogin.replace(/"/g,'&quot;')}" data-field="newLogin" data-idx="${idx}"></td>
+      <td><input type="text" value="${row.link.replace(/"/g,'&quot;')}" data-field="link" data-idx="${idx}"></td>
+      <td>
+        <select data-field="status" data-idx="${idx}">
+          <option ${row.status==="Not started"?"selected":""}>Not started</option>
+          <option ${row.status==="In progress"?"selected":""}>In progress</option>
+          <option ${row.status==="Done"?"selected":""}>Done</option>
+        </select>
+      </td>
+      <td><button class="btn-secondary" data-remove="${idx}" style="padding:3px 8px;font-size:.72rem;">✕</button></td>
+    `;
+    body.appendChild(tr);
+  });
+
+  body.querySelectorAll("input, select").forEach(el=>{
+    el.addEventListener("input", (e)=>{
+      const idx = +e.target.dataset.idx;
+      const field = e.target.dataset.field;
+      TRACKER.rows[idx][field] = e.target.value;
+      saveTracker();
+    });
+  });
+  body.querySelectorAll("[data-remove]").forEach(btn=>{
+    btn.addEventListener("click", (e)=>{
+      const idx = +e.target.dataset.remove;
+      TRACKER.rows.splice(idx,1);
+      saveTracker();
+      renderTrackerTable();
+    });
+  });
+}
+
+document.getElementById("addRowBtn").addEventListener("click", ()=>{
+  TRACKER.rows.push({ platform:"", oldLogin:"", newLogin:"", link:"", status:"Not started" });
+  saveTracker();
+  renderTrackerTable();
+});
+
+document.getElementById("downloadCsvBtn").addEventListener("click", ()=>{
+  let csv = "Section,Field,Value\n";
+  csv += `Sponsor,Sponsor Name,"${(TRACKER.sponsor||"").replace(/"/g,'""')}"\n`;
+  csv += `Sponsor,Co-Sponsor Name,"${(TRACKER.cosponsor||"").replace(/"/g,'""')}"\n`;
+  csv += `Sponsor,Date Selected,"${(TRACKER.date||"").replace(/"/g,'""')}"\n`;
+  csv += `Sponsor,Notes,"${(TRACKER.notes||"").replace(/"/g,'""')}"\n`;
+  csv += `Info,Bank Account + Routing,"${(TRACKER.bank||"").replace(/"/g,'""')}"\n`;
+  csv += `Info,NRDS #,"${(TRACKER.nrds||"").replace(/"/g,'""')}"\n`;
+  csv += `Info,EIN,"${(TRACKER.ein||"").replace(/"/g,'""')}"\n`;
+  csv += "\nPlatform,Old Login,New Login,Link,Status\n";
+  TRACKER.rows.forEach(r=>{
+    csv += `"${r.platform.replace(/"/g,'""')}","${r.oldLogin.replace(/"/g,'""')}","${r.newLogin.replace(/"/g,'""')}","${r.link.replace(/"/g,'""')}","${r.status.replace(/"/g,'""')}"\n`;
+  });
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "exp-transfer-tracking-sheet.csv";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+
+// ---------- TABS ----------
+document.querySelectorAll(".tab-btn").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(".tab-content").forEach(c=>c.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById("tab-"+btn.dataset.tab).classList.add("active");
+  });
+});
+
+// ---------- INIT ----------
+renderFaq();
+renderTop();
+renderPhases();
+renderTrackerFields();
+renderTrackerTable();
+</script>
+</body>
+</html>
